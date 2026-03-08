@@ -11,7 +11,9 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:3034/api");
+        // const response = await axios.get("http://localhost:3034/api");
+        const response = await axios.get("https://genzback.onrender.com/api");
+
         if (response.data.success) {
           setCategories(response.data.data);
         }
@@ -25,14 +27,19 @@ const ProductList = () => {
   // Handle product deletion
   const handleDelete = async (categoryId, productId) => {
     try {
-      const response = await axios.post("http://localhost:3034/api/product-delete", { categoryId, productId });
+      const response = await axios.post(
+        "https://genzback.onrender.com/api/products/delete",
+        { categoryId, productId },
+      );
       if (response.data.success) {
         alert("Product deleted successfully");
-        setCategories(prevCategories =>
-          prevCategories.map(category => ({
+        setCategories((prevCategories) =>
+          prevCategories.map((category) => ({
             ...category,
-            product_container: category.product_container.filter(product => product.id !== productId),
-          }))
+            product_container: category.product_container.filter(
+              (product) => product.id !== productId,
+            ),
+          })),
         );
       } else {
         alert("Failed to delete product");
@@ -81,7 +88,8 @@ const ProductList = () => {
       const formData = new FormData();
       formData.append("categoryId", selectedCategoryId);
       if (values.file) formData.append("file", values.file);
-      if (values.side_img_file) formData.append("side_img_file", values.side_img_file);
+      if (values.side_img_file)
+        formData.append("side_img_file", values.side_img_file);
       formData.append("product_name", values.product_name);
       formData.append("product_route", values.product_route);
       formData.append("product_price", values.product_price);
@@ -93,9 +101,13 @@ const ProductList = () => {
       formData.append("size_main", values.size_main);
 
       try {
-        const response = await axios.post("http://localhost:3034/api/product-add", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
+        const response = await axios.post(
+          "https://genzback.onrender.com/api/product-add",
+          formData,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+          },
+        );
         if (response.data.success) {
           alert("Product added successfully");
           resetForm();
@@ -113,7 +125,10 @@ const ProductList = () => {
   const handleProductNameChange = (e) => {
     const nameValue = e.target.value;
     formik.setFieldValue("product_name", nameValue);
-    if (!formik.values.product_route || formik.values.product_route.trim() === "") {
+    if (
+      !formik.values.product_route ||
+      formik.values.product_route.trim() === ""
+    ) {
       const route = nameValue.trim().toLowerCase().replace(/\s+/g, "-");
       formik.setFieldValue("product_route", route);
     }
@@ -126,9 +141,12 @@ const ProductList = () => {
       <div className="add-product-form">
         <h4>Add Products</h4>
         <form onSubmit={formik.handleSubmit}>
-          <select value={selectedCategoryId} onChange={e => setSelectedCategoryId(e.target.value)}>
+          <select
+            value={selectedCategoryId}
+            onChange={(e) => setSelectedCategoryId(e.target.value)}
+          >
             <option value="">Select Category</option>
-            {categories.map(cat => (
+            {categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
                 {cat.product_category}
               </option>
@@ -138,7 +156,9 @@ const ProductList = () => {
             <input
               type="file"
               name="file"
-              onChange={event => formik.setFieldValue("file", event.currentTarget.files[0])}
+              onChange={(event) =>
+                formik.setFieldValue("file", event.currentTarget.files[0])
+              }
             />
           </div>
           <input
@@ -210,22 +230,35 @@ const ProductList = () => {
               type="file"
               name="side_img_file"
               id="side_img_file"
-              onChange={event => formik.setFieldValue("side_img_file", event.currentTarget.files[0])}
+              onChange={(event) =>
+                formik.setFieldValue(
+                  "side_img_file",
+                  event.currentTarget.files[0],
+                )
+              }
             />
           </div>
           <button type="submit">Upload</button>
         </form>
       </div>
-      {categories.map(category => (
+      {categories.map((category) => (
         <div key={category.id} className="category">
           <h2>{category.product_category}</h2>
-          <img src={category.category_img} alt={category.product_category} className="category-img" />
+          <img
+            src={category.category_img}
+            alt={category.product_category}
+            className="category-img"
+          />
 
           {/* Display all products with full details */}
           <div className="products-container">
-            {category.product_container.map(product => (
+            {category.product_container.map((product) => (
               <div key={product.id} className="product-card">
-                <img src={product.product_img} alt={product.product_name} className="primary-image" />
+                <img
+                  src={product.product_img}
+                  alt={product.product_name}
+                  className="primary-image"
+                />
                 <h3>{product.product_name}</h3>
                 <p>
                   <strong>Route:</strong> {product.product_route}
@@ -234,13 +267,16 @@ const ProductList = () => {
                   <strong>Price:</strong> ₹{product.product_price}
                 </p>
                 <p className="discounted-price">
-                  <strong>Previous Price:</strong> ₹{product.product_price_deleted}
+                  <strong>Previous Price:</strong> ₹
+                  {product.product_price_deleted}
                 </p>
                 <p>
-                  <strong>Rating:</strong> {product.rating} ({product.count} reviews)
+                  <strong>Rating:</strong> {product.rating} ({product.count}{" "}
+                  reviews)
                 </p>
                 <p>
-                  <strong>Stock:</strong> {product.stock ? "In Stock" : "Out of Stock"}
+                  <strong>Stock:</strong>{" "}
+                  {product.stock ? "In Stock" : "Out of Stock"}
                 </p>
                 <p>
                   <strong>Description:</strong> {product.product_description}
@@ -250,7 +286,7 @@ const ProductList = () => {
                     <p>
                       <strong>Side Images:</strong>
                     </p>
-                    {product.side_img.map(img => (
+                    {product.side_img.map((img) => (
                       <img
                         key={img.id}
                         src={img.img}
@@ -265,14 +301,16 @@ const ProductList = () => {
                     <p>
                       <strong>Available Sizes:</strong>
                     </p>
-                    {product.size_main.map(size => (
+                    {product.size_main.map((size) => (
                       <span key={size.id} className="size">
                         {size.size}
                       </span>
                     ))}
                   </div>
                 )}
-                <button onClick={() => handleDelete(category.id, product.id)}>Delete</button>
+                <button onClick={() => handleDelete(category.id, product.id)}>
+                  Delete
+                </button>
               </div>
             ))}
           </div>

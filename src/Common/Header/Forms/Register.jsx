@@ -33,7 +33,7 @@ const Register = () => {
       .email("*Invalid email format")
       .required("*Email is required"),
     fname: Yup.string("*Enter your FirstName").required(
-      "*FirstName is required"
+      "*FirstName is required",
     ),
     lname: Yup.string("*Enter your LastName").required("*LastName is required"),
     mobile: Yup.string()
@@ -41,7 +41,7 @@ const Register = () => {
       .matches(/^[0-9]+$/, "Must be only digits")
       .max(10, "Must be exactly 10 digits"),
     password: Yup.string("*Enter your password").required(
-      "*password is required"
+      "*password is required",
     ),
   });
 
@@ -159,7 +159,10 @@ const Register = () => {
             <ErrorMessage name="password" component="div" className="error" />
           </span>
 
-          <button className="loginbtn"> Register </button>
+          <button type="submit" className="loginbtn">
+            {" "}
+            Register{" "}
+          </button>
         </Form>
       </Formik>
     </div>

@@ -85,7 +85,8 @@ const Contactdata = ({ contactdata }) => {
                     <td>{new Date(returns.createdAt).toLocaleDateString()}</td>
                     <td>
                       <a
-                        href={`http://localhost:3034${returns.file}`}
+                        // href={`http://localhost:3034${returns.file}`}
+                        href={`https://genzback.onrender.com${returns.file}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >

@@ -11,12 +11,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Camera } from "lucide-react";
 import axios from "axios";
 
-
 const Header = () => {
   const {
     wish,
-   
-   
+
     isProfileHovered,
     setIsProfileHovered,
     searchBarRef2,
@@ -32,31 +30,34 @@ const Header = () => {
 
   const location = useLocation();
 
-const navigate = useNavigate()
+  const navigate = useNavigate();
 
-const handleImageChange = async (event) => {
-  const file = event.target.files[0];
-  if (!file) return;
+  const handleImageChange = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
 
-  const formData = new FormData();
-  formData.append("image", file);
+    const formData = new FormData();
+    formData.append("image", file);
 
-  try {
-    const response = await axios.post("http://localhost:3034/image-search", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    try {
+      // const response = await axios.post("http://localhost:3034/image-search", formData, {
+      const response = await axios.post(
+        "https://genzback.onrender.com/image-search",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
 
-    
-    navigate("/products-by-image", {
-      state: { similarImages: response.data.similarImages },
-    });
-  } catch (error) {
-    console.error("Image upload failed:", error);
-  }
-};
-
+      navigate("/products-by-image", {
+        state: { similarImages: response.data.similarImages },
+      });
+    } catch (error) {
+      console.error("Image upload failed:", error);
+    }
+  };
 
   const cartShipPament =
     location.pathname !== "/cart" && location.pathname !== "/shipping-details";
@@ -79,7 +80,7 @@ const handleImageChange = async (event) => {
 
   const items = useMemo(
     () => ["T-Shirt", "Track-Pants", "Gym-tank", "Sports-sando"],
-    []
+    [],
   );
   const [animate, setAnimate] = useState(false);
 
@@ -131,7 +132,6 @@ const handleImageChange = async (event) => {
                 accept="image/*"
                 style={{ display: "none" }}
                 onChange={handleImageChange}
-              
               />
               <span className="imgnry-placeholder">
                 Search for

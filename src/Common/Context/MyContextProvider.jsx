@@ -107,8 +107,8 @@ const MyContextProvider = ({ children }) => {
   };
   // for youtube open(newslater) end
 
-  const url = "http://localhost:3034";
-  // const url = 'https://vhx-backend.vercel.app/'
+  // const url = "http://localhost:3034";
+  const url = "https://genzback.onrender.com";
   //
 
   const [passModalOpen, setPassModalOpen] = useState(true);
@@ -367,7 +367,7 @@ const MyContextProvider = ({ children }) => {
     productid,
     productimg,
     productname,
-    productprice
+    productprice,
   ) => {
     try {
       if (!token) {
@@ -399,7 +399,7 @@ const MyContextProvider = ({ children }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (data.success) {
@@ -417,7 +417,7 @@ const MyContextProvider = ({ children }) => {
     } catch (error) {
       console.error(
         "Error during checkout:",
-        error.response?.data?.error || error.message
+        error.response?.data?.error || error.message,
       );
     } finally {
       setLoading(false);
@@ -433,7 +433,7 @@ const MyContextProvider = ({ children }) => {
 
       if (category && category.product_container) {
         const product = category.product_container.find(
-          (product) => product.id === cart.productid
+          (product) => product.id === cart.productid,
         );
 
         if (product) {
@@ -463,7 +463,7 @@ const MyContextProvider = ({ children }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       if (data.success) {
         setCartItems(data.cartInfo);
@@ -475,7 +475,7 @@ const MyContextProvider = ({ children }) => {
     } catch (error) {
       console.error(
         "Error removing from cart:",
-        error.response?.data?.error || error.message
+        error.response?.data?.error || error.message,
       );
       setMessage("An error occurred. Please try again.");
       setOpen(true);
@@ -498,7 +498,7 @@ const MyContextProvider = ({ children }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (data.success) {
@@ -511,7 +511,7 @@ const MyContextProvider = ({ children }) => {
     } catch (error) {
       console.error(
         "Error adding quantity in cart:",
-        error.response?.data?.error || error.message
+        error.response?.data?.error || error.message,
       );
       setMessage("An error occurred. Please try again.");
       setOpen(true);
@@ -535,7 +535,7 @@ const MyContextProvider = ({ children }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       if (data.success) {
         setCartItems(data.cartInfo);
@@ -547,7 +547,7 @@ const MyContextProvider = ({ children }) => {
     } catch (error) {
       console.error(
         "Error deleting quantity in cart:",
-        error.response?.data?.error || error.message
+        error.response?.data?.error || error.message,
       );
       setMessage("An error occurred. Please try again.");
       setOpen(true);
@@ -594,7 +594,7 @@ const MyContextProvider = ({ children }) => {
     productid,
     productimg,
     productname,
-    productprice
+    productprice,
   ) => {
     try {
       if (!token) {
@@ -615,7 +615,7 @@ const MyContextProvider = ({ children }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (data.success) {
@@ -650,7 +650,7 @@ const MyContextProvider = ({ children }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (data.success) {
@@ -713,7 +713,7 @@ const MyContextProvider = ({ children }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (data.success) {
@@ -754,7 +754,7 @@ const MyContextProvider = ({ children }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (data.success) {
@@ -816,7 +816,7 @@ const MyContextProvider = ({ children }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (data.success) {
