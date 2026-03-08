@@ -54,7 +54,6 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/terms-and-condition" element={<Tearm />} />
         <Route path="/" element={<Home />} />
-        <Route path="/GenZFront" element={<Home />} />
 
         <Route path="/categories" element={<Categories />} />
         <Route path="/account-details" element={<Accountdetails />} />
