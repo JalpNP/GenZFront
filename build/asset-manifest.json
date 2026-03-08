@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b0ce49fd.css",
+    "main.js": "/static/js/main.04110713.js",
+    "static/media/revicons.eot": "/static/media/revicons.a77de540a38981833f9e.eot",
+    "static/media/revicons.ttf": "/static/media/revicons.57fd05d4ae650374c8de.ttf",
+    "static/media/logo.png": "/static/media/logo.092495035c3b4ded8926.png",
+    "static/media/revicons.woff": "/static/media/revicons.e8746a624ed098489406.woff",
+    "index.html": "/index.html",
+    "main.b0ce49fd.css.map": "/static/css/main.b0ce49fd.css.map",
+    "main.04110713.js.map": "/static/js/main.04110713.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b0ce49fd.css",
+    "static/js/main.04110713.js"
+  ]
+}
