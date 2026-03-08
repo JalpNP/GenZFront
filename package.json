@@ -34,6 +34,7 @@
     "react-scripts": "5.0.1",
     "reactjs-otp-input": "^2.0.10",
     "sass": "^1.79.5",
+    "serve": "^14.2.4",
     "shadcn-ui": "^0.9.3",
     "socket.io-client": "^4.8.1",
     "styled-components": "^6.1.13",
@@ -41,7 +42,8 @@
     "yup": "^1.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "serve -s build -l $PORT",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
